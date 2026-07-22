@@ -4,4 +4,6 @@ The browser runtime uses strict TypeScript, ES modules, Canvas 2D, Vite, and Vit
 
 The source documents `developer-insights.txt` and `build-insights.txt` were unavailable during bootstrap. Their supported guidance must be normalized here when available, with conflicts preserved rather than silently resolved.
 
-See `docs/architecture/sprint-1-engine-architecture.md` for the implemented Sprint 1 structure.
+Tactical data flows in one direction: external JSON → runtime validation → resolved immutable map model → pure navigation/coordinate services → ordered render passes. The renderer never owns authoritative terrain, movement, or path state.
+
+See `docs/architecture/sprint-1-engine-architecture.md` and `docs/architecture/sprint-2-tactical-architecture.md` for implemented structures.

@@ -29,6 +29,7 @@ export class Game {
   private readonly performance = new PerformanceMonitor();
   private readonly debug: DebugOverlay;
   private readonly audio: AudioManager;
+  private readonly demoScene: EngineDemoScene;
   private readonly loop: GameLoop;
   private disposed = false;
 
@@ -48,12 +49,14 @@ export class Game {
     this.audio = new AudioManager(this.settings);
     this.scenes.register(new LoadingScene(() => void this.scenes.change('menu')));
     this.scenes.register(new MainMenuScene(this.renderer, this.shell));
-    this.scenes.register(new EngineDemoScene(this.renderer, this.camera, this.input, this.config.camera.keyboardPanSpeed));
+    this.demoScene = new EngineDemoScene(this.renderer, this.camera, this.input, this.config.camera.keyboardPanSpeed, this.shell, () => this.debug.isEnabled);
+    this.scenes.register(this.demoScene);
     this.loop = new GameLoop((time) => {
       try {
         if (this.input.state('toggleDebug').pressed) this.debug.toggle();
-        this.scenes.update(time); this.performance.sample(time.deltaSeconds); this.scenes.render();
-        this.debug.update({ performance: this.performance.snapshot, viewport: this.renderer.viewport.size, scene: this.scenes.currentId ?? 'none', camera: this.camera, pointer: this.input.pointer, input: this.input.summary() });
+        this.performance.beginUpdate(); this.scenes.update(time); this.performance.endUpdate(); this.performance.sample(time.deltaSeconds);
+        this.performance.beginRender(); this.scenes.render(); this.performance.endRender();
+        this.debug.update({ performance: this.performance.snapshot, updateMs: this.performance.updateMs, renderMs: this.performance.renderMs, viewport: this.renderer.viewport.size, scene: this.scenes.currentId ?? 'none', camera: this.camera, pointer: this.input.pointer, input: this.input.summary(), tactical: this.scenes.currentId === 'demo' ? this.demoScene.debugSnapshot : undefined });
         this.input.endFrame();
       } catch (error) { this.handleFatal(error); }
     }, new Time(this.config.maxDeltaSeconds));

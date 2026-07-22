@@ -1,0 +1,33 @@
+{
+  "version": 1,
+  "id": "tactical-engine-demo",
+  "name": "Tactical Engine Demonstration",
+  "width": 6,
+  "height": 6,
+  "tileWidth": 96,
+  "tileHeight": 48,
+  "elevationStep": 24,
+  "terrain": [
+    { "id": "grass", "name": "Grass", "type": "ground", "movementCost": 1, "walkable": true, "cover": "none", "opacity": 0, "destructible": false, "hazards": [], "color": "#4d6952" },
+    { "id": "road", "name": "Old Road", "type": "road", "movementCost": 0.75, "walkable": true, "cover": "none", "opacity": 0, "destructible": false, "hazards": [], "color": "#796b59" },
+    { "id": "forest", "name": "Dense Forest", "type": "forest", "movementCost": 2, "walkable": true, "cover": "half", "opacity": 0.6, "destructible": true, "hazards": [], "color": "#294a3a" },
+    { "id": "water", "name": "Deep Water", "type": "water", "movementCost": 4, "walkable": false, "cover": "none", "opacity": 0, "destructible": false, "hazards": ["water"], "color": "#31566c" },
+    { "id": "stone", "name": "High Stone", "type": "stone", "movementCost": 1.5, "walkable": true, "cover": "half", "opacity": 0.2, "destructible": false, "hazards": [], "color": "#666770" }
+  ],
+  "tiles": [
+    {"x":0,"y":0,"terrain":"grass","elevation":0},{"x":1,"y":0,"terrain":"grass","elevation":0},{"x":2,"y":0,"terrain":"forest","elevation":0},{"x":3,"y":0,"terrain":"forest","elevation":0},{"x":4,"y":0,"terrain":"grass","elevation":1},{"x":5,"y":0,"terrain":"stone","elevation":1},
+    {"x":0,"y":1,"terrain":"grass","elevation":0},{"x":1,"y":1,"terrain":"road","elevation":0},{"x":2,"y":1,"terrain":"road","elevation":0},{"x":3,"y":1,"terrain":"grass","elevation":0},{"x":4,"y":1,"terrain":"grass","elevation":1},{"x":5,"y":1,"terrain":"stone","elevation":2},
+    {"x":0,"y":2,"terrain":"water","elevation":0},{"x":1,"y":2,"terrain":"road","elevation":0},{"x":2,"y":2,"terrain":"grass","elevation":0},{"x":3,"y":2,"terrain":"grass","elevation":1},{"x":4,"y":2,"terrain":"stone","elevation":1},{"x":5,"y":2,"terrain":"stone","elevation":2},
+    {"x":0,"y":3,"terrain":"water","elevation":0},{"x":1,"y":3,"terrain":"road","elevation":0},{"x":2,"y":3,"terrain":"grass","elevation":0},{"x":3,"y":3,"terrain":"forest","elevation":1},{"x":4,"y":3,"terrain":"stone","elevation":1},{"x":5,"y":3,"terrain":"grass","elevation":1},
+    {"x":0,"y":4,"terrain":"grass","elevation":0},{"x":1,"y":4,"terrain":"road","elevation":0},{"x":2,"y":4,"terrain":"road","elevation":0},{"x":3,"y":4,"terrain":"road","elevation":0},{"x":4,"y":4,"terrain":"grass","elevation":0},{"x":5,"y":4,"terrain":"grass","elevation":0},
+    {"x":0,"y":5,"terrain":"forest","elevation":0},{"x":1,"y":5,"terrain":"grass","elevation":0},{"x":2,"y":5,"terrain":"grass","elevation":0},{"x":3,"y":5,"terrain":"grass","elevation":0},{"x":4,"y":5,"terrain":"grass","elevation":0},{"x":5,"y":5,"terrain":"forest","elevation":0}
+  ],
+  "spawnPoints": [{ "id": "player-entry", "team": "player", "x": 1, "y": 4 }, { "id": "opposition-entry", "team": "opposition", "x": 5, "y": 1 }],
+  "objectives": [{ "id": "ridge", "type": "reach", "x": 5, "y": 2, "required": true }],
+  "decorations": [{ "id": "marker-1", "kind": "waystone", "x": 3, "y": 3, "elevationOffset": 0 }],
+  "triggers": [{ "id": "ridge-enter", "event": "enter", "x": 5, "y": 2, "radius": 0 }],
+  "encounters": [{ "id": "demo-encounter", "spawnPointIds": ["opposition-entry"], "activationTriggerId": "ridge-enter" }],
+  "weather": { "type": "clear", "intensity": 0 },
+  "lighting": { "ambient": "#d8c7b0", "intensity": 0.8, "direction": 2.3 },
+  "metadata": { "purpose": "Sprint 2 tactical engine validation", "authoring": "hand-authored JSON" }
+}

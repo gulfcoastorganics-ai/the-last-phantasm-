@@ -10,6 +10,9 @@ const KEY_MAP: Readonly<Record<string, InputAction>> = {
 export class InputManager {
   pointer: Point = { x: 0, y: 0 };
   pointerDown = false;
+  pointerPressed = false;
+  pointerActive = false;
+  pointerType = 'mouse';
   dragDelta: Point = { x: 0, y: 0 };
   wheelDelta = 0;
   private readonly actions = new InputActionTracker();
@@ -29,7 +32,7 @@ export class InputManager {
 
   state(action: InputAction): ActionState { return this.actions.state(action); }
   summary(): string { return this.actions.summary(); }
-  endFrame(): void { this.actions.endFrame(); this.dragDelta = { x: 0, y: 0 }; this.wheelDelta = 0; }
+  endFrame(): void { this.actions.endFrame(); this.dragDelta = { x: 0, y: 0 }; this.wheelDelta = 0; this.pointerPressed = false; }
 
   private readonly onKeyDown = (event: KeyboardEvent): void => {
     const action = KEY_MAP[event.code]; if (!action) return;
@@ -40,11 +43,11 @@ export class InputManager {
     this.actions.release(action);
   };
   private readonly onPointerDown = (event: PointerEvent): void => {
-    this.pointerDown = true; this.pointer = this.toLocal(event); this.lastPointer = this.pointer;
+    this.pointerDown = true; this.pointerPressed = true; this.pointerActive = true; this.pointerType = event.pointerType || 'mouse'; this.pointer = this.toLocal(event); this.lastPointer = this.pointer;
     this.target.setPointerCapture?.(event.pointerId);
   };
   private readonly onPointerMove = (event: PointerEvent): void => {
-    this.pointer = this.toLocal(event);
+    this.pointerActive = true; this.pointerType = event.pointerType || 'mouse'; this.pointer = this.toLocal(event);
     if (this.pointerDown && this.lastPointer) this.dragDelta = { x: this.dragDelta.x + this.pointer.x - this.lastPointer.x, y: this.dragDelta.y + this.pointer.y - this.lastPointer.y };
     this.lastPointer = this.pointer;
   };

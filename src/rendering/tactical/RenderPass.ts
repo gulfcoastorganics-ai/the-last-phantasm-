@@ -1,0 +1,3 @@
+import type { Camera } from '../Camera'; import type { CanvasRenderer } from '../CanvasRenderer'; import type { TacticalMap } from '../../data/tactical/TacticalMap'; import type { IsometricGrid } from '../../world/IsometricGrid'; import type { TileHighlights } from '../TileHighlights'; import type { GridPoint } from '../../world/GridCoordinates';
+export interface TacticalRenderState { readonly renderer: CanvasRenderer; readonly camera: Camera; readonly map: TacticalMap; readonly grid: IsometricGrid; readonly highlights: TileHighlights; readonly selected?: GridPoint; readonly hovered?: GridPoint; readonly debug: boolean; readonly path: readonly GridPoint[]; }
+export interface RenderPass { readonly id: string; render(state: TacticalRenderState): number; }

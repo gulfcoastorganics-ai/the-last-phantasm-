@@ -1,0 +1,2 @@
+import { describe, expect, it, vi } from 'vitest'; import { ObjectPool } from '../../src/core/ObjectPool';
+describe('ObjectPool', () => { it('resets and reuses transient render objects within its cap', () => { const reset = vi.fn((value: { count: number }) => { value.count = 0; }); const pool = new ObjectPool(() => ({ count: 0 }), reset, 1, 1); const first = pool.acquire(); first.count = 4; pool.release(first); const second = pool.acquire(); expect(second).toBe(first); expect(second.count).toBe(0); expect(reset).toHaveBeenCalledOnce(); }); });

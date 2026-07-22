@@ -20,6 +20,7 @@ h1 { margin: .15rem 0; font-size: clamp(3rem, 8vw, 6rem); line-height: .85; font
 .demo-controls button { min-height: 2.5rem; padding: .45rem .75rem; background: rgba(20,17,25,.9); }
 .debug-overlay { position: absolute; top: 1rem; right: 1rem; margin: 0; padding: .65rem; border: 1px solid var(--line); background: rgba(3,6,9,.88); color: #aef0c1; font: .75rem/1.5 ui-monospace, monospace; pointer-events: none; }
 .announcement { position: absolute; right: 1rem; bottom: 1rem; max-width: 18rem; margin: 0; color: var(--muted); font: .8rem system-ui, sans-serif; }
+.tactical-status { position: absolute; left: 1rem; top: 1rem; max-width: min(22rem, calc(100% - 2rem)); padding: .6rem .8rem; border: 1px solid var(--line); background: rgba(8,10,15,.86); color: var(--ink); font: .8rem/1.4 system-ui, sans-serif; pointer-events: none; }
 dialog { width: min(28rem, calc(100% - 2rem)); border: 1px solid var(--line); border-radius: .35rem; background: #17121f; color: var(--ink); box-shadow: 0 1rem 5rem #000; }
 dialog::backdrop { background: rgba(4,3,7,.75); }
 dialog form { display: grid; gap: 1.25rem; }

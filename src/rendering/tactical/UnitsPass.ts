@@ -1,0 +1,2 @@
+import type { RenderPass, TacticalRenderState } from './RenderPass';
+export class UnitsPass implements RenderPass { readonly id = 'units'; render(state: TacticalRenderState): number { if (!state.selected) return 0; const tile = state.map.get(state.selected.x, state.selected.y); if (!tile) return 0; let calls = 0; state.renderer.withCamera(state.camera, (context) => { const center = state.grid.gridToWorld(tile); context.fillStyle = '#f0c982'; context.beginPath(); context.arc(center.x, center.y - 16, 8, 0, Math.PI * 2); context.fill(); calls += 1; }); return calls; } }

@@ -4,4 +4,5 @@ The source `/mnt/data/demo-roadmap.txt` was not present during bootstrap on 2026
 
 1. **Sprint 1 — Core Engine Foundation:** application lifecycle, scenes, input, Canvas, platform services, and diagnostics.
 2. **Sprint 2 — Tactical Engine Foundation:** external maps, isometric terrain/elevation, navigation algorithms, overlays, tactical rendering passes, and polished camera behavior.
-3. **Sprint 3 — First Combat Framework:** units, Charge Time battle flow, combat resolution, AI, and the first playable tactical encounter. Sprint 3 must not begin until Sprint 2 validation passes.
+3. **Sprint 3 — Playable Tactical Combat Prototype:** units, Charge Time battle flow, combat resolution, AI, and a non-canonical playable tactical encounter. Complete subject to browser visual QA.
+4. **Sprint 4 — Silent Convoy vertical slice:** begin only after missing canonical sources are imported; integrate approved characters, dialogue, mission scripting, and narrative presentation.

@@ -1,4 +1,6 @@
-# Combat System Boundary
+# Combat System Boundary (Sprint 2 Record)
+
+This historical boundary defined the handoff into Sprint 3. The implemented authoritative rules now live in `combat-spec.md`, `ai-spec.md`, `data-schemas.md`, and `save-format.md`.
 
 Sprint 2 does not implement combat. It establishes the contracts Sprint 3 may consume without coupling tactical space to combat rules.
 

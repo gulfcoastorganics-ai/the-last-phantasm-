@@ -1,6 +1,6 @@
 # Testing Strategy
 
-Fast unit tests cover deterministic boundaries: events, time clamping, scene lifecycle/disposal, input action transitions, camera transforms/limits, save validation and recovery, and configuration merging.
+Fast unit tests cover deterministic engine and combat boundaries: events, lifecycle, input, camera, saves, coordinates, maps, pathfinding, units, occupancy, initiative, turns, LOS, formulas, status effects, AI, objectives, and battle snapshot restoration.
 
 The required gate is:
 

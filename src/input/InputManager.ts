@@ -5,6 +5,8 @@ const KEY_MAP: Readonly<Record<string, InputAction>> = {
   ArrowLeft: 'panLeft', KeyA: 'panLeft', ArrowRight: 'panRight', KeyD: 'panRight',
   ArrowUp: 'panUp', KeyW: 'panUp', ArrowDown: 'panDown', KeyS: 'panDown',
   Enter: 'confirm', Escape: 'cancel', KeyF: 'focus', Backquote: 'toggleDebug',
+  KeyH: 'cursorLeft', KeyL: 'cursorRight', KeyK: 'cursorUp', KeyJ: 'cursorDown',
+  KeyM: 'commandMove', KeyR: 'commandAttack', KeyE: 'endTurn', KeyI: 'inspect',
 };
 
 export class InputManager {

@@ -1,0 +1,25 @@
+{
+  "version": 1,
+  "templates": [
+    { "id": "vanguard", "displayName": "Vanguard", "jobId": "prototype-vanguard", "level": 1, "stats": { "maxHp": 52, "maxMp": 8, "speed": 11, "move": 4, "jump": 1, "physicalAttack": 15, "physicalDefense": 10, "magicAttack": 5, "magicDefense": 7, "accuracy": 12, "evasion": 5, "criticalChance": 8 }, "weaponId": "iron-sword", "abilities": [], "aiProfile": "aggressiveMelee" },
+    { "id": "scout", "displayName": "Scout", "jobId": "prototype-scout", "level": 1, "stats": { "maxHp": 38, "maxMp": 12, "speed": 15, "move": 5, "jump": 1, "physicalAttack": 12, "physicalDefense": 7, "magicAttack": 7, "magicDefense": 8, "accuracy": 18, "evasion": 10, "criticalChance": 12 }, "weaponId": "short-bow", "abilities": [], "aiProfile": "cautiousRanged" },
+    { "id": "raider", "displayName": "Raider", "jobId": "prototype-raider", "level": 1, "stats": { "maxHp": 40, "maxMp": 4, "speed": 10, "move": 4, "jump": 1, "physicalAttack": 13, "physicalDefense": 8, "magicAttack": 4, "magicDefense": 6, "accuracy": 10, "evasion": 6, "criticalChance": 7 }, "weaponId": "iron-sword", "abilities": [], "aiProfile": "aggressiveMelee" },
+    { "id": "archer", "displayName": "Archer", "jobId": "prototype-archer", "level": 1, "stats": { "maxHp": 34, "maxMp": 8, "speed": 12, "move": 4, "jump": 1, "physicalAttack": 11, "physicalDefense": 6, "magicAttack": 5, "magicDefense": 7, "accuracy": 17, "evasion": 8, "criticalChance": 10 }, "weaponId": "short-bow", "abilities": [], "aiProfile": "cautiousRanged" }
+  ],
+  "weapons": [
+    { "id": "iron-sword", "name": "Iron Sword", "category": "sword", "power": 9, "minRange": 1, "maxRange": 1, "maxElevationDelta": 1, "accuracyModifier": 5, "criticalModifier": 2, "permitsCounter": true },
+    { "id": "short-bow", "name": "Short Bow", "category": "bow", "power": 7, "minRange": 2, "maxRange": 4, "maxElevationDelta": 2, "accuracyModifier": 0, "criticalModifier": 4, "permitsCounter": true }
+  ],
+  "abilities": [],
+  "aiProfiles": [
+    { "id": "aggressiveMelee", "killWeight": 1000, "damageWeight": 8, "hitWeight": 2, "rearWeight": 70, "sideWeight": 30, "hazardPenalty": 200, "maxDestinations": 32, "maxTargets": 8, "maxOperations": 256 },
+    { "id": "cautiousRanged", "killWeight": 1000, "damageWeight": 7, "hitWeight": 3, "rearWeight": 35, "sideWeight": 20, "hazardPenalty": 300, "maxDestinations": 32, "maxTargets": 8, "maxOperations": 256 },
+    { "id": "defensive", "killWeight": 900, "damageWeight": 6, "hitWeight": 3, "rearWeight": 20, "sideWeight": 10, "hazardPenalty": 400, "maxDestinations": 24, "maxTargets": 8, "maxOperations": 192 }
+  ],
+  "statuses": [
+    { "id": "guard", "stackPolicy": "refresh", "speedMultiplier": 1, "damageMultiplier": 0.6, "poisonDamage": 0 },
+    { "id": "haste", "stackPolicy": "refresh", "speedMultiplier": 1.5, "damageMultiplier": 1, "poisonDamage": 0 },
+    { "id": "slow", "stackPolicy": "refresh", "speedMultiplier": 0.5, "damageMultiplier": 1, "poisonDamage": 0 },
+    { "id": "poison", "stackPolicy": "refresh", "speedMultiplier": 1, "damageMultiplier": 1, "poisonDamage": 4 }
+  ]
+}

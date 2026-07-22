@@ -10,7 +10,7 @@ export class SaveManager {
   saveSettings(data: SettingsData): void { this.write(SaveManager.settingsKey, data); }
   loadCampaign(): LoadResult<CampaignData> { return this.read(SaveManager.campaignKey, isCampaignEnvelope); }
   loadSettings(): LoadResult<SettingsData> { return this.read(SaveManager.settingsKey, isSettingsEnvelope); }
-  settingsOrDefault(): SettingsData { const result = this.loadSettings(); return result.ok ? result.data : { ...DEFAULT_SETTINGS }; }
+  settingsOrDefault(): SettingsData { const result = this.loadSettings(); return result.ok ? { ...DEFAULT_SETTINGS, ...result.data } : { ...DEFAULT_SETTINGS }; }
   resetCampaign(): void { this.storage.removeItem(SaveManager.campaignKey); }
   resetSettings(): void { this.storage.removeItem(SaveManager.settingsKey); }
   exportCampaign(): string | undefined { return this.storage.getItem(SaveManager.campaignKey) ?? undefined; }

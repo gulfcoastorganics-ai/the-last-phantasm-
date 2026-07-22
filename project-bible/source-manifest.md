@@ -14,3 +14,11 @@ Import date: 2026-07-21. `/mnt/data` did not exist in the execution environment,
 | `git-repo.txt` | `/mnt/data/git-repo.txt` | `docs/development/repository-origin.md` | Repository provenance | Unavailable; origin verified directly |
 
 Concept images: none could be inspected because `/mnt/data` was absent.
+
+## Repository-authored Sprint 3 data
+
+| Source | Destination/purpose | Treatment |
+|---|---|---|
+| Sprint 3 implementation brief | `public/data/combat-prototype.json` | Synthesized non-canonical prototype unit, weapon, AI, and status data |
+| Sprint 3 implementation brief | `public/data/battle-prototype.json` | Synthesized non-canonical battle placement, objective, and seed data |
+| Sprint 3 implementation brief | `public/maps/combat-prototype.json` | Synthesized 8×8 combat-validation map using the version 1 map schema |

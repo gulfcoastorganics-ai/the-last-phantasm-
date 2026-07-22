@@ -21,6 +21,20 @@ h1 { margin: .15rem 0; font-size: clamp(3rem, 8vw, 6rem); line-height: .85; font
 .debug-overlay { position: absolute; top: 1rem; right: 1rem; margin: 0; padding: .65rem; border: 1px solid var(--line); background: rgba(3,6,9,.88); color: #aef0c1; font: .75rem/1.5 ui-monospace, monospace; pointer-events: none; }
 .announcement { position: absolute; right: 1rem; bottom: 1rem; max-width: 18rem; margin: 0; color: var(--muted); font: .8rem system-ui, sans-serif; }
 .tactical-status { position: absolute; left: 1rem; top: 1rem; max-width: min(22rem, calc(100% - 2rem)); padding: .6rem .8rem; border: 1px solid var(--line); background: rgba(8,10,15,.86); color: var(--ink); font: .8rem/1.4 system-ui, sans-serif; pointer-events: none; }
+.battle-hud { position: absolute; inset: 0; pointer-events: none; font: .78rem/1.35 system-ui, sans-serif; }
+.battle-hud > * { pointer-events: auto; border: 1px solid var(--line); background: rgba(8,10,15,.88); }
+.unit-panel { position: absolute; left: 1rem; top: 1rem; display: grid; gap: .12rem; min-width: 12rem; padding: .65rem .8rem; }
+.initiative-panel { position: absolute; top: 1rem; left: 50%; transform: translateX(-50%); display: flex; gap: .6rem; padding: .5rem .75rem; }
+.objective-panel { position: absolute; right: 1rem; top: 1rem; max-width: 15rem; padding: .6rem .8rem; }
+.command-menu { position: absolute; left: 1rem; bottom: 4.5rem; display: flex; flex-wrap: wrap; gap: .35rem; max-width: 24rem; padding: .45rem; }
+.command-menu button { min-height: 2.6rem; padding: .4rem .65rem; }
+.facing-controls { display: inline-flex; gap: .2rem; padding-left: .25rem; border-left: 1px solid var(--line); }
+.facing-controls button { min-width: 2.6rem; }
+.action-preview { position: absolute; right: 1rem; bottom: 4.5rem; max-width: 20rem; padding: .65rem .8rem; }
+.battle-log { position: absolute; right: 1rem; bottom: 1rem; width: min(20rem, calc(100% - 2rem)); padding: .4rem .65rem; }
+.battle-log ol { max-height: 8rem; margin: .4rem 0 0; padding-left: 1.4rem; overflow: auto; color: var(--muted); }
+.battle-result { position: absolute; inset: 50% auto auto 50%; transform: translate(-50%, -50%); display: flex; align-items: center; gap: .8rem; padding: 1rem; font-size: 1.2rem; }
+.battle-result[hidden], .battle-hud[hidden] { display: none; }
 dialog { width: min(28rem, calc(100% - 2rem)); border: 1px solid var(--line); border-radius: .35rem; background: #17121f; color: var(--ink); box-shadow: 0 1rem 5rem #000; }
 dialog::backdrop { background: rgba(4,3,7,.75); }
 dialog form { display: grid; gap: 1.25rem; }
@@ -30,5 +44,5 @@ dialog form { display: grid; gap: 1.25rem; }
 dialog label:not(.check) { display: grid; gap: .5rem; }
 dialog p { color: var(--muted); font: .9rem/1.5 system-ui, sans-serif; }
 .fatal-error, .boot-error { position: absolute; inset: 50% auto auto 50%; transform: translate(-50%, -50%); z-index: 5; width: min(34rem, calc(100% - 2rem)); padding: 2rem; border: 1px solid #c67663; background: #25151c; text-align: center; }
-@media (max-width: 600px) { .menu-panel { width: 100%; padding: 2rem; background: rgba(9,7,13,.8); } .debug-overlay { max-width: calc(100% - 2rem); font-size: .65rem; } .announcement { bottom: 4.5rem; } }
+@media (max-width: 600px) { .menu-panel { width: 100%; padding: 2rem; background: rgba(9,7,13,.8); } .debug-overlay { max-width: calc(100% - 2rem); font-size: .65rem; } .announcement { bottom: 4.5rem; } .initiative-panel { top: auto; bottom: 8.2rem; } .objective-panel { top: 6.2rem; max-width: 11rem; } .command-menu { bottom: 4.2rem; max-width: calc(100% - 2rem); } .action-preview { bottom: 11.5rem; max-width: 12rem; } }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; } }

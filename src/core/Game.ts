@@ -39,8 +39,8 @@ export class Game {
       onNewGame: () => this.startNewGame(), onDemo: () => void this.changeScene('demo'),
       onSettings: () => this.shell.openSettings(), onCloseSettings: () => this.shell.closeSettings(),
       onSaveSmokeTest: () => this.saveSmokeTest(), onVolume: (value) => this.updateSettings({ masterVolume: value }),
-      onMute: (value) => this.updateSettings({ muted: value }), onDebug: () => { this.debug.toggle(); this.updateSettings({ debug: this.debug.isEnabled }); },
-      onZoom: (delta) => this.camera.setZoom(this.camera.zoom + delta), onFocus: () => this.camera.focus(),
+      onMute: (value) => this.updateSettings({ muted: value }), onScreenShake: (value) => this.updateSettings({ screenShake: value }), onDebug: () => { this.debug.toggle(); this.updateSettings({ debug: this.debug.isEnabled }); },
+      onZoom: (delta) => this.camera.setZoom(this.camera.zoom + delta), onFocus: () => this.camera.focus(), onExitBattle: () => this.returnToMenu(),
     });
     this.renderer = new CanvasRenderer(this.shell.canvas, this.config.maxDevicePixelRatio);
     this.input = new InputManager(this.shell.canvas, (event) => this.renderer.toCanvasPoint(event));
@@ -49,7 +49,7 @@ export class Game {
     this.audio = new AudioManager(this.settings);
     this.scenes.register(new LoadingScene(() => void this.scenes.change('menu')));
     this.scenes.register(new MainMenuScene(this.renderer, this.shell));
-    this.demoScene = new EngineDemoScene(this.renderer, this.camera, this.input, this.config.camera.keyboardPanSpeed, this.shell, () => this.debug.isEnabled);
+    this.demoScene = new EngineDemoScene(this.renderer, this.camera, this.input, this.config.camera.keyboardPanSpeed, this.shell, this.audio, () => this.debug.isEnabled);
     this.scenes.register(this.demoScene);
     this.loop = new GameLoop((time) => {
       try {
@@ -74,6 +74,7 @@ export class Game {
   private startNewGame(): void { this.save.saveCampaign({ startedAt: new Date().toISOString(), currentScene: 'demo' }); void this.changeScene('demo'); this.shell.announce('New chronicle initialized safely.'); }
   private saveSmokeTest(): void { const before = this.save.loadCampaign(); if (!before.ok) this.save.saveCampaign({ startedAt: new Date().toISOString(), currentScene: 'demo' }); const after = this.save.loadCampaign(); this.shell.announce(after.ok ? 'Save foundation test passed.' : `Save test failed: ${after.reason}.`); }
   private updateSettings(patch: Partial<SettingsData>): void { this.settings = { ...this.settings, ...patch }; this.save.saveSettings(this.settings); this.audio.update(this.settings); }
+  private returnToMenu(): void { this.shell.hideFatal(); this.loop.setPaused(false); void this.scenes.change('menu'); }
   private readonly onVisibility = (): void => this.loop.setPaused(document.hidden);
   private readonly onWindowError = (event: ErrorEvent): void => this.handleFatal(event.error ?? new Error(event.message));
   private readonly onUnhandledRejection = (event: PromiseRejectionEvent): void => this.handleFatal(event.reason);

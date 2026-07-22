@@ -1,0 +1,8 @@
+import type { StatusDefinition, StatusId, UnitBattleState } from './CombatTypes'; import { addStatus, applyDamage, removeStatus } from './UnitModel';
+export class StatusSystem { private readonly definitions: ReadonlyMap<StatusId, StatusDefinition>; constructor(definitions: readonly StatusDefinition[]) { this.definitions = new Map(definitions.map((definition) => [definition.id, definition])); }
+  apply(unit: UnitBattleState, id: StatusId, duration: number, sourceUnitId?: UnitBattleState['id']): void { const definition = this.require(id); addStatus(unit, { id, duration, stacks: 1, sourceUnitId }, definition.stackPolicy); }
+  initiativeMultiplier(unit: UnitBattleState): number { return unit.statuses.reduce((value, status) => value * this.require(status.id).speedMultiplier, 1); }
+  damageMultiplier(unit: UnitBattleState): number { return unit.statuses.reduce((value, status) => value * this.require(status.id).damageMultiplier, 1); }
+  processTurnEnd(unit: UnitBattleState): readonly string[] { const events: string[] = []; for (const status of [...unit.statuses]) { const definition = this.require(status.id); if (definition.poisonDamage > 0 && unit.alive) { const damage = applyDamage(unit, definition.poisonDamage * status.stacks); events.push(`${unit.displayName} suffers ${damage} poison damage.`); } status.duration -= 1; if (status.duration <= 0) { removeStatus(unit, status.id); events.push(`${unit.displayName}'s ${status.id} expired.`); } } return events; }
+  private require(id: StatusId): StatusDefinition { const value = this.definitions.get(id); if (!value) throw new Error(`Missing status definition: ${id}`); return value; }
+}

@@ -2,7 +2,7 @@ import type { Camera, Point } from '../rendering/Camera';
 import type { ViewportSize } from '../rendering/Viewport';
 import type { PerformanceSnapshot } from './PerformanceMonitor';
 
-export interface TacticalDebugData { readonly tile?: Point; readonly elevation?: number; readonly terrain?: string; readonly selected?: Point; readonly pathNodes: number; readonly drawCalls: number; }
+export interface TacticalDebugData { readonly tile?: Point; readonly elevation?: number; readonly terrain?: string; readonly selected?: Point; readonly pathNodes: number; readonly drawCalls: number; readonly battlePhase?: string; readonly activeUnit?: string; readonly initiative?: string; readonly command?: string; readonly aiCandidates?: number; readonly aiScore?: number; readonly randomState?: number; readonly occupancy?: string; readonly lineOfSight?: string; }
 export interface DebugData { readonly performance: PerformanceSnapshot; readonly updateMs: number; readonly renderMs: number; readonly viewport: ViewportSize; readonly scene: string; readonly camera: Camera; readonly pointer: Point; readonly input: string; readonly tactical?: TacticalDebugData; }
 export class DebugOverlay {
   private enabled = false;
@@ -13,7 +13,7 @@ export class DebugOverlay {
   update(data: DebugData): void {
     if (!this.enabled) return;
     const { performance, viewport, camera, pointer } = data;
-    const tactical = data.tactical; const tacticalText = tactical ? `\nTile ${formatPoint(tactical.tile)} | elevation ${tactical.elevation ?? '—'}\nTerrain ${tactical.terrain ?? '—'} | selected ${formatPoint(tactical.selected)}\nPath nodes ${tactical.pathNodes} | draw calls ${tactical.drawCalls}` : '';
+    const tactical = data.tactical; const tacticalText = tactical ? `\nTile ${formatPoint(tactical.tile)} | elevation ${tactical.elevation ?? '—'}\nTerrain ${tactical.terrain ?? '—'} | selected ${formatPoint(tactical.selected)}\nPath nodes ${tactical.pathNodes} | draw calls ${tactical.drawCalls}\nBattle ${tactical.battlePhase ?? '—'} | active ${tactical.activeUnit ?? '—'} | command ${tactical.command ?? '—'}\nCT ${tactical.initiative ?? '—'}\nAI ${tactical.aiCandidates ?? 0} candidates | score ${tactical.aiScore?.toFixed(1) ?? '—'} | PRNG ${tactical.randomState ?? '—'}\nOccupancy ${tactical.occupancy ?? '—'}\nLOS ${tactical.lineOfSight ?? '—'}` : '';
     this.element.textContent = `FPS ${performance.fps} | frame ${performance.frameMs.toFixed(1)} ms\nUpdate ${data.updateMs.toFixed(2)} ms | render ${data.renderMs.toFixed(2)} ms\nCanvas ${viewport.width}×${viewport.height} @ ${viewport.dpr.toFixed(2)} DPR\nScene ${data.scene}\nCamera ${camera.x.toFixed(0)}, ${camera.y.toFixed(0)} | ${camera.zoom.toFixed(2)}×\nPointer ${pointer.x.toFixed(0)}, ${pointer.y.toFixed(0)}\nInput ${data.input}${tacticalText}`;
   }
 }

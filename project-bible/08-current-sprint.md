@@ -1,29 +1,30 @@
-# Sprint 2 — Tactical Engine Foundation
+# Sprint 3 — Playable Tactical Combat Prototype
 
 ## Objective
 
-Finish the reusable tactical systems that every future mission, unit, combat rule, and AI controller will consume. This sprint contains no story or mission implementation.
+Deliver a deterministic, data-driven battle prototype on the Sprint 2 tactical engine without introducing campaign content or a runtime framework.
 
-## Deliverables
+## Completed scope
 
-- [x] Arbitrary-size isometric grid/world/screen conversion and elevation-aware picking
-- [x] Data-driven terrain definitions and resolved tile overrides
-- [x] Versioned, validated external JSON maps with safe loading failures and collection defaults
-- [x] Map data for terrain, elevation, spawns, objectives, decorations, triggers, encounters, weather, lighting, and metadata
-- [x] Smooth camera focus/fit, follow hook, edge scrolling, inertia, zoom smoothing, and coordinate helpers
-- [x] Cached A* with terrain/elevation cost, occupancy, impassability, optional diagonals, and reconstruction
-- [x] Movement-budget flood fill with remaining-movement values
-- [x] Layered semantic tile highlights
-- [x] Ordered terrain, overlay, unit, effect, UI, and debug render passes
-- [x] Extended development-only diagnostics for timing, tactical coordinates, path nodes, and draw calls
-- [x] Accessible DOM status plus keyboard, pointer, and touch operation
-- [x] Regression and tactical unit tests
-- [ ] Browser screenshot-based visual playtest
+- [x] Validated external unit templates, placements, weapons, AI profiles, statuses, battle definition, and 8×8 map
+- [x] Serializable unit runtime and centralized mutations
+- [x] Shared occupancy, one-tile footprints, reservations, spawn validation, and defeat removal
+- [x] Deterministic CT initiative with five-turn forecast
+- [x] Validated turn state machine and explicit `hasMoved`/`hasActed`
+- [x] Player move, attack, wait/guard, end-turn, cancel, inspect, and facing controls
+- [x] Movement range/path reuse and presentation-only interpolation
+- [x] Facing, elevation, hit, damage, critical, LOS, structured results, and non-recursive counters
+- [x] Guard, Haste, Slow, and Poison status foundation
+- [x] Bounded deterministic enemy AI and data-driven objectives
+- [x] Team/facing/HP/active/target/impact unit markers in the existing unit pass
+- [x] Compact accessible battle HUD, procedural optional audio, diagnostics, and battle snapshots
+- [x] Expanded unit and integration tests
+- [ ] Screenshot-based browser interaction verification
 
 ## Explicitly out of scope
 
-Units as gameplay entities, Charge Time, attacks, damage, abilities, enemy AI, mission scripting, story content, inventory, jobs, equipment, and production art/audio.
+Final characters, story, dialogue, campaign state, inventory, job switching, equipment management, ability catalog, spell effects, sophisticated reactions, and production assets.
 
 ## Definition of done
 
-The engine loads an external map, renders terrain/elevation, selects tiles accurately, previews movement range and paths, layers overlays deterministically, passes all automated gates, and exposes stable system contracts for Sprint 3.
+Automated type, test, build, audit, and diff gates pass; external combat data loads; player and deterministic AI turns complete; victory/loss and restart work; battle snapshots validate and restore; documentation matches implementation.

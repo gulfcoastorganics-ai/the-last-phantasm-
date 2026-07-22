@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "id": "sprint-3-combat-prototype",
+  "mapId": "combat-prototype",
+  "seed": 20260721,
+  "units": [
+    { "id": "ally-vanguard", "templateId": "vanguard", "team": "allies", "position": { "x": 1, "y": 6 }, "facing": "north", "controllable": true, "spawnOrder": 0 },
+    { "id": "ally-scout", "templateId": "scout", "team": "allies", "position": { "x": 2, "y": 7 }, "facing": "north", "controllable": true, "spawnOrder": 1 },
+    { "id": "enemy-raider-a", "templateId": "raider", "team": "enemies", "position": { "x": 6, "y": 1 }, "facing": "south", "controllable": false, "spawnOrder": 2 },
+    { "id": "enemy-raider-b", "templateId": "raider", "team": "enemies", "position": { "x": 7, "y": 2 }, "facing": "south", "controllable": false, "spawnOrder": 3 },
+    { "id": "enemy-archer", "templateId": "archer", "team": "enemies", "position": { "x": 5, "y": 0 }, "facing": "south", "controllable": false, "spawnOrder": 4 }
+  ],
+  "objectives": [
+    { "id": "defeat-opposition", "type": "defeatAllEnemies", "description": "Defeat all enemy units." },
+    { "id": "survive", "type": "keepAllyAlive", "description": "Keep at least one allied unit alive." }
+  ]
+}

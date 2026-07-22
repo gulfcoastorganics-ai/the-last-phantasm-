@@ -1,0 +1,2 @@
+import type { Scene } from '../core/Scene'; import type { TimeSnapshot } from '../core/Time';
+export class LoadingScene implements Scene { readonly id = 'loading'; private elapsed = 0; constructor(private readonly ready: () => void) {} enter(): void { this.elapsed = 0; } update(time: TimeSnapshot): void { this.elapsed += time.deltaSeconds; if (this.elapsed >= 0.05) this.ready(); } render(): void {} exit(): void {} dispose(): void {} }

@@ -1,0 +1,2 @@
+import { describe, expect, it } from 'vitest'; import { DEFAULT_CONFIG, loadConfig } from '../../src/core/Config';
+describe('Config', () => { it('loads defaults and merges nested overrides', () => { expect(loadConfig()).toEqual(DEFAULT_CONFIG); const config = loadConfig({ camera: { ...DEFAULT_CONFIG.camera, minZoom: .25 } }); expect(config.camera.minZoom).toBe(.25); expect(config.camera.maxZoom).toBe(DEFAULT_CONFIG.camera.maxZoom); }); });

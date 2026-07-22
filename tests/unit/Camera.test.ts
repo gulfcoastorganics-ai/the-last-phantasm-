@@ -1,0 +1,2 @@
+import { describe, expect, it } from 'vitest'; import { Camera } from '../../src/rendering/Camera';
+describe('Camera', () => { it('round-trips coordinate conversion', () => { const camera = new Camera(); camera.focus(50, -20); camera.setZoom(2); const viewport = { x: 800, y: 600 }; const world = { x: 175, y: 30 }; expect(camera.screenToWorld(camera.worldToScreen(world, viewport), viewport)).toEqual(world); }); it('clamps zoom', () => { const camera = new Camera(.5, 2); camera.setZoom(99); expect(camera.zoom).toBe(2); camera.setZoom(0); expect(camera.zoom).toBe(.5); }); });

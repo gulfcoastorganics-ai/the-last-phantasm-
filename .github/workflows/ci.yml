@@ -12,7 +12,7 @@ permissions:
 jobs:
   check:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -20,4 +20,19 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
-      - run: npm run check
+      - name: Typecheck, tests, and production build
+        run: npm run check
+      - name: Smoke production preview
+        run: |
+          npm run preview -- --host 127.0.0.1 --port 4173 >/tmp/phantasm-preview.log 2>&1 &
+          PREVIEW_PID=$!
+          trap 'kill $PREVIEW_PID 2>/dev/null || true' EXIT
+          for i in {1..30}; do
+            if curl --fail --silent --show-error http://127.0.0.1:4173/the-last-phantasm-/ >/tmp/phantasm-index.html; then
+              break
+            fi
+            sleep 0.25
+          done
+          test -s /tmp/phantasm-index.html
+          grep -qi 'The Last Phantasm' /tmp/phantasm-index.html
+          grep -q '/the-last-phantasm-/' /tmp/phantasm-index.html
